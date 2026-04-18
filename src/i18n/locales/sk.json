@@ -1,0 +1,70 @@
+{
+  "app": {
+    "name": "OmniBridge",
+    "tagline": "Komunitná pomoc pre každého"
+  },
+  "nav": {
+    "feed": "Domov",
+    "new": "Nový príspevok",
+    "resources": "Zdroje",
+    "settings": "Nastavenia"
+  },
+  "offline": {
+    "banner": "Offline — posledná aktualizácia pred {{time}}",
+    "syncing": "Synchronizujem...",
+    "outbox": "{{count}} príspevkov čaká na odoslanie"
+  },
+  "feed": {
+    "title": "Nablízku v Košiciach",
+    "empty": "Zatiaľ žiadne príspevky. Buďte prvý!",
+    "readAloud": "Prečítať nahlas",
+    "stopReading": "Zastaviť čítanie",
+    "iCanHelp": "Môžem pomôcť",
+    "markedHelped": "Ďakujeme!",
+    "ago": "pred {{time}}"
+  },
+  "categories": {
+    "help": "Pomoc",
+    "food": "Jedlo",
+    "medical": "Zdravie",
+    "ride": "Odvoz",
+    "legal": "Právna",
+    "resource": "Zdroj",
+    "tech": "Technika",
+    "other": "Iné"
+  },
+  "new": {
+    "title": "Nový príspevok",
+    "tapToSpeak": "Stlačte a hovorte",
+    "listening": "Počúvam...",
+    "stopRecording": "Zastaviť",
+    "orType": "alebo napíšte",
+    "chooseCategory": "Vyberte kategóriu",
+    "placeholder": "Čo potrebujete alebo ponúkate?",
+    "location": "Lokalita (nepovinné)",
+    "submit": "Uverejniť",
+    "translating": "Prekladám...",
+    "success": "Príspevok odoslaný",
+    "queued": "Príspevok uložený — odošle sa keď budete online",
+    "errorVoice": "Hlasový vstup nie je dostupný v tomto prehliadači"
+  },
+  "resources": {
+    "title": "Miestne zdroje",
+    "subtitle": "Overené miesta pomoci v Košiciach",
+    "contact": "Kontakt",
+    "hours": "Otvorené",
+    "directions": "Smer"
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "language": "Jazyk",
+    "profile": "Profil",
+    "yourName": "Vaše meno",
+    "yourEmoji": "Vaše emoji",
+    "namePlaceholder": "Meno (zobrazí sa pri príspevkoch)",
+    "save": "Uložiť",
+    "saved": "Uložené",
+    "about": "O aplikácii",
+    "aboutText": "OmniBridge prepája obyvateľov, utečencov a starších susedov v miestnej pomoci — hlasom, obrázkami a prekladom."
+  }
+}

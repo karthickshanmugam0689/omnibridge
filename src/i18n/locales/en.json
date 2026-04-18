@@ -1,0 +1,70 @@
+{
+  "app": {
+    "name": "OmniBridge",
+    "tagline": "Community help for everyone"
+  },
+  "nav": {
+    "feed": "Home",
+    "new": "New post",
+    "resources": "Resources",
+    "settings": "Settings"
+  },
+  "offline": {
+    "banner": "Offline — last updated {{time}} ago",
+    "syncing": "Syncing...",
+    "outbox": "{{count}} posts waiting to sync"
+  },
+  "feed": {
+    "title": "Nearby in Košice",
+    "empty": "No posts yet. Be the first!",
+    "readAloud": "Read aloud",
+    "stopReading": "Stop reading",
+    "iCanHelp": "I can help",
+    "markedHelped": "Thank you!",
+    "ago": "{{time}} ago"
+  },
+  "categories": {
+    "help": "Help",
+    "food": "Food",
+    "medical": "Medical",
+    "ride": "Ride",
+    "legal": "Legal",
+    "resource": "Resource",
+    "tech": "Tech",
+    "other": "Other"
+  },
+  "new": {
+    "title": "New post",
+    "tapToSpeak": "Tap to speak",
+    "listening": "Listening...",
+    "stopRecording": "Stop",
+    "orType": "or type",
+    "chooseCategory": "Choose a category",
+    "placeholder": "What do you need or offer?",
+    "location": "Location (optional)",
+    "submit": "Post it",
+    "translating": "Translating...",
+    "success": "Post sent",
+    "queued": "Saved — will send when you're online",
+    "errorVoice": "Voice input not supported in this browser"
+  },
+  "resources": {
+    "title": "Local resources",
+    "subtitle": "Verified places that help in Košice",
+    "contact": "Contact",
+    "hours": "Open",
+    "directions": "Directions"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "profile": "Profile",
+    "yourName": "Your name",
+    "yourEmoji": "Your emoji",
+    "namePlaceholder": "Name (shown on your posts)",
+    "save": "Save",
+    "saved": "Saved",
+    "about": "About",
+    "aboutText": "OmniBridge connects neighbours, refugees and older residents for local help — with voice, icons and translation."
+  }
+}
