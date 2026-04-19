@@ -12,10 +12,12 @@ import {
   keywordRank,
   getEmbeddingStatus,
   subscribeEmbeddingStatus,
-  filterRelevantHits,
   type SearchHit,
 } from "@/lib/embeddings";
 import { cn } from "@/lib/utils";
+
+// Match FeedScreen — embeddings rank everything, we JS-slice the top 3.
+const MAX_SEARCH_RESULTS = 3;
 
 export default function ResourcesScreen() {
   const { t } = useTranslation();
@@ -69,11 +71,12 @@ export default function ResourcesScreen() {
     if (!query.trim() || !hits) {
       return resources.map((post) => ({ post, matched: false }));
     }
-    const top = filterRelevantHits(hits);
-    if (top.length === 0) {
-      const kw = keywordRank(query, resources);
-      return kw.filter((h) => h.score > 0).map((h) => ({ post: h.post, matched: true }));
-    }
+    // Embedding cosine rank, then JS-slice to top 3. Keeps parity with
+    // FeedScreen — the user sees at most three answers with the clearest
+    // relevance signal so scanning stays effortless.
+    const top = hits
+      .filter((h) => h.score > 0)
+      .slice(0, MAX_SEARCH_RESULTS);
     return top.map((h) => ({ post: h.post, matched: true }));
   })();
 

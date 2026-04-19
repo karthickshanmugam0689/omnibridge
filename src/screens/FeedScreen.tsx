@@ -14,16 +14,16 @@ import {
   keywordRank,
   getEmbeddingStatus,
   subscribeEmbeddingStatus,
-  filterRelevantHits,
   type SearchHit,
 } from "@/lib/embeddings";
 import type { Post } from "@/lib/types";
 
-// When the user is offline we intentionally show a tighter result list so
-// they can scan the most likely answers in one glance, and we lean on the
-// "go online for more" nudge below to set expectations rather than burying
-// weaker matches under the top ones.
-const OFFLINE_MAX_RESULTS = 3;
+// Search is intentionally a tight "top N" list so elderly/refugee users
+// can eyeball the answers at a glance. Embeddings do the heavy lifting
+// of cross-language ranking; we then just slice the top few by cosine
+// score. Precision beats recall — if none of these are right the
+// AskCommunityCard below gives them a way out.
+const MAX_SEARCH_RESULTS = 3;
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -102,24 +102,18 @@ export default function FeedScreen() {
     };
   }, [query, posts, embedderReady]);
 
-  const displayList: { post: Post; matched: boolean }[] = (() => {
+  const displayList: { post: Post; matched: boolean }[] = useMemo(() => {
     if (!posts) return [];
     if (!query.trim() || !hits) {
       return posts.map((post) => ({ post, matched: false }));
     }
-    const cap = offline ? OFFLINE_MAX_RESULTS : undefined;
-    const top = filterRelevantHits(hits, cap);
-    if (top.length === 0) {
-      // Nothing scores high enough to be confidently relevant — fall back to
-      // exact keyword matches so the user always sees something if it's there.
-      const kw = keywordRank(query, posts);
-      const matches = kw
-        .filter((h) => h.score > 0)
-        .map((h) => ({ post: h.post, matched: true }));
-      return offline ? matches.slice(0, OFFLINE_MAX_RESULTS) : matches;
-    }
+    // Embeddings rank everything by cosine similarity; we then JS-filter
+    // to the top 3 with a non-zero score. No confidence threshold — the
+    // model's opinion on "best 3" is good enough, and showing a fixed
+    // number keeps the UI predictable across wildly different queries.
+    const top = hits.filter((h) => h.score > 0).slice(0, MAX_SEARCH_RESULTS);
     return top.map((h) => ({ post: h.post, matched: true }));
-  })();
+  }, [query, posts, hits]);
 
   const showingResults = query.trim().length > 0;
 

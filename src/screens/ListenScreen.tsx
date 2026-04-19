@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { db } from "@/lib/db";
 import {
-  filterRelevantHits,
   getEmbeddingStatus,
   keywordRank,
   semanticRank,
@@ -43,9 +42,11 @@ import { hapticTap, hapticSuccess, hapticError } from "@/lib/haptics";
 
 type Phase = "idle" | "listening" | "thinking" | "match" | "empty";
 
-// Keep parity with FeedScreen's offline cap so the flagship flow doesn't
-// feel more generous than the feed search when the user is disconnected.
-const OFFLINE_MAX_RESULTS = 3;
+// Keep parity with FeedScreen. Search is a fixed "top 3" list regardless
+// of connectivity — three is the largest number a stressed elderly user
+// can scan at a glance, and it lines up with the read-aloud flow below
+// (next / next / next → "nothing else matches").
+const MAX_RESULTS = 3;
 
 interface Localised {
   post: Post;
@@ -76,15 +77,14 @@ function localisePost(post: Post, viewerLang: string): Localised {
  * next/skip/accept. Degrades gracefully to a keyboard textarea when the
  * browser has no SpeechRecognition, and skips TTS when no voice is available.
  *
- * Deliberately reuses everything from FeedScreen's search pipeline so
- * results here can't drift from results there: same `semanticRank`,
- * `filterRelevantHits`, `keywordRank` fallback, same OFFLINE_MAX_RESULTS cap.
+ * Deliberately reuses FeedScreen's search pipeline so results here
+ * can't drift from results there: same `semanticRank`, same
+ * `keywordRank` fallback, same fixed "top 3" slice.
  */
 export default function ListenScreen() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const language = useAppStore((s) => s.language);
-  const offline = useAppStore((s) => !s.online || s.offlineDemo);
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [transcript, setTranscript] = useState("");
@@ -178,12 +178,14 @@ export default function ListenScreen() {
         } else {
           hits = keywordRank(q, pool);
         }
-        const cap = offline ? OFFLINE_MAX_RESULTS : undefined;
-        let top = filterRelevantHits(hits, cap);
-        if (top.length === 0) {
-          const kw = keywordRank(q, pool).filter((h) => h.score > 0);
-          top = offline ? kw.slice(0, OFFLINE_MAX_RESULTS) : kw;
-        }
+        // Embedding cosine rank, then JS-slice the top 3 with non-zero
+        // scores. No confidence threshold — just "best three". Matches
+        // FeedScreen / ResourcesScreen for UX consistency. `offline` no
+        // longer changes the cap; three is always the right number for
+        // this flow.
+        const top = hits
+          .filter((h) => h.score > 0)
+          .slice(0, MAX_RESULTS);
         const localised = top.map((h) => localisePost(h.post, language));
         if (localised.length === 0) {
           setMatches([]);
@@ -221,7 +223,7 @@ export default function ListenScreen() {
         setPhase("idle");
       }
     },
-    [posts, embedderReady, offline, language, canSpeak, t, playMatch],
+    [posts, embedderReady, language, canSpeak, t, playMatch],
   );
 
   const startListen = useCallback(() => {

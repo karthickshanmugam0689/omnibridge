@@ -212,9 +212,11 @@ export async function semanticRank(query: string, posts: Post[]): Promise<Search
 }
 
 /**
- * Substring-based fallback scorer — works instantly with no model, used while
- * the embedder is still downloading. Returns 0/1-ish scores so results are
- * deterministic but clearly "keyword" rather than semantic.
+ * Substring-based fallback scorer — works instantly with no model, used
+ * while the embedder is still downloading or on a device that can't run
+ * it. Returns 0/1 scores so the UI can just filter by `score > 0` and
+ * slice — same shape as `semanticRank` so the consumer doesn't care
+ * which ranker produced the list.
  */
 export function keywordRank(query: string, posts: Post[]): SearchHit[] {
   const q = query.trim().toLowerCase();
