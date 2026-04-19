@@ -21,7 +21,7 @@ void i18n
       ar: { translation: ar },
       uk: { translation: uk },
     },
-    fallbackLng: "sk",
+    fallbackLng: "en",
     supportedLngs: SUPPORTED_LANGUAGES,
     interpolation: { escapeValue: false },
     detection: {

@@ -1,13 +1,30 @@
+import { useEffect, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useTranslation } from "react-i18next";
-import { Phone, Clock, MapPin } from "lucide-react";
+import { Phone, Clock, MapPin, Sparkles } from "lucide-react";
 import { db } from "@/lib/db";
-import { CATEGORY_EMOJI } from "@/lib/types";
+import { CATEGORY_EMOJI, type Post } from "@/lib/types";
 import { useAppStore } from "@/store/useAppStore";
+import SearchBar from "@/components/SearchBar";
+import AskCommunityCard from "@/components/AskCommunityCard";
+import {
+  semanticRank,
+  keywordRank,
+  getEmbeddingStatus,
+  subscribeEmbeddingStatus,
+  filterRelevantHits,
+  type SearchHit,
+} from "@/lib/embeddings";
+import { cn } from "@/lib/utils";
 
 export default function ResourcesScreen() {
   const { t } = useTranslation();
   const language = useAppStore((s) => s.language);
+  const query = useAppStore((s) => s.searchQuery);
+  const [hits, setHits] = useState<SearchHit[] | null>(null);
+  const [embedderReady, setEmbedderReady] = useState(
+    getEmbeddingStatus().phase === "ready",
+  );
 
   const resources = useLiveQuery(
     () =>
@@ -19,15 +36,79 @@ export default function ResourcesScreen() {
     [],
   );
 
+  useEffect(() => {
+    return subscribeEmbeddingStatus((s) => setEmbedderReady(s.phase === "ready"));
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      if (!resources || !query.trim()) {
+        setHits(null);
+        return;
+      }
+      if (embedderReady) {
+        try {
+          const ranked = await semanticRank(query, resources);
+          if (!cancelled) setHits(ranked);
+          return;
+        } catch (err) {
+          console.warn("[resources] semantic rank failed", err);
+        }
+      }
+      if (!cancelled) setHits(keywordRank(query, resources));
+    };
+    void run();
+    return () => {
+      cancelled = true;
+    };
+  }, [query, resources, embedderReady]);
+
+  const displayList: { post: Post; matched: boolean }[] = (() => {
+    if (!resources) return [];
+    if (!query.trim() || !hits) {
+      return resources.map((post) => ({ post, matched: false }));
+    }
+    const top = filterRelevantHits(hits);
+    if (top.length === 0) {
+      const kw = keywordRank(query, resources);
+      return kw.filter((h) => h.score > 0).map((h) => ({ post: h.post, matched: true }));
+    }
+    return top.map((h) => ({ post: h.post, matched: true }));
+  })();
+
+  const showingResults = query.trim().length > 0;
+
   return (
     <section className="space-y-4">
+      <SearchBar />
+
       <header>
-        <h1>{t("resources.title")}</h1>
-        <p className="text-muted-foreground mt-1">{t("resources.subtitle")}</p>
+        <h1>{showingResults ? t("search.resultsTitle") : t("resources.title")}</h1>
+        {!showingResults && (
+          <p className="text-muted-foreground mt-1">{t("resources.subtitle")}</p>
+        )}
       </header>
 
+      {showingResults && displayList.length > 0 && (
+        <p className="text-sm text-muted-foreground flex items-center gap-2">
+          <Sparkles className="size-4 text-primary" aria-hidden />
+          {embedderReady
+            ? t("search.smartResults", { count: displayList.length })
+            : t("search.keywordResults", { count: displayList.length })}
+        </p>
+      )}
+
+      {showingResults && displayList.length === 0 && (
+        <AskCommunityCard query={query} variant="empty" />
+      )}
+
+      {showingResults && displayList.length > 0 && (
+        <AskCommunityCard query={query} variant="followup" />
+      )}
+
       <div className="space-y-4">
-        {resources?.map((r) => {
+        {displayList.map(({ post: r, matched }) => {
           const title =
             language === "sk"
               ? r.title_sk
@@ -37,7 +118,19 @@ export default function ResourcesScreen() {
               ? r.body_sk ?? ""
               : r.body_translations?.[language as "en" | "ar" | "uk"] ?? r.body_sk ?? "";
           return (
-            <article key={r.id} className="card space-y-3">
+            <article
+              key={r.id}
+              className={cn(
+                "card space-y-3 transition-shadow",
+                matched && "ring-2 ring-primary/60 shadow-lg",
+              )}
+            >
+              {matched && (
+                <div className="chip bg-primary/10 text-primary border border-primary/20 -mb-1">
+                  <Sparkles className="size-4" aria-hidden />
+                  {t("search.matchBadge")}
+                </div>
+              )}
               <header className="flex items-start gap-3">
                 <div
                   className="text-4xl shrink-0 size-14 rounded-2xl bg-secondary/10 grid place-items-center"
@@ -72,7 +165,7 @@ export default function ResourcesScreen() {
           );
         })}
 
-        {resources && resources.length === 0 && (
+        {!showingResults && resources && resources.length === 0 && (
           <p className="text-muted-foreground">{t("feed.empty")}</p>
         )}
       </div>

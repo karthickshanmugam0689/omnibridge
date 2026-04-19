@@ -6,7 +6,9 @@ import { db } from "@/lib/db";
 
 export default function OfflineBanner() {
   const { t } = useTranslation();
-  const online = useAppStore((s) => s.online);
+  const realOnline = useAppStore((s) => s.online);
+  const offlineDemo = useAppStore((s) => s.offlineDemo);
+  const online = realOnline && !offlineDemo;
   const lastSyncedAt = useAppStore((s) => s.lastSyncedAt);
   const [outboxCount, setOutboxCount] = useState(0);
 

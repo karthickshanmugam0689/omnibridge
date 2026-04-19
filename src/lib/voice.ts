@@ -102,6 +102,44 @@ export function stopSpeaking() {
   if (voiceOutputSupported()) window.speechSynthesis.cancel();
 }
 
+/**
+ * Speak a sequence of utterances back-to-back, resolving when the last one
+ * finishes (or rejecting when one errors). Returns a `cancel` function so
+ * callers can abort mid-flight — e.g. when the user taps "Next match" and
+ * we want to cut off the current author/title/body chain cleanly.
+ *
+ * We wire the sequencing through `onEnd` callbacks rather than pushing all
+ * utterances into `speechSynthesis.speak()` at once because Safari drops
+ * queued utterances silently when `cancel()` is called; chaining is the
+ * only reliable way to interrupt on-demand.
+ */
+export function speakSequence(items: SpeakOptions[]): { cancel: () => void } {
+  let cancelled = false;
+  let index = 0;
+
+  const playNext = () => {
+    if (cancelled || index >= items.length) return;
+    const item = items[index++];
+    const originalOnEnd = item.onEnd;
+    speak({
+      ...item,
+      onEnd: () => {
+        originalOnEnd?.();
+        playNext();
+      },
+    });
+  };
+
+  playNext();
+
+  return {
+    cancel: () => {
+      cancelled = true;
+      stopSpeaking();
+    },
+  };
+}
+
 export function localeToBcp47(language: string): string {
   switch (language) {
     case "sk":

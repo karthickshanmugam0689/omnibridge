@@ -17,11 +17,17 @@
   "feed": {
     "title": "Nearby in Košice",
     "empty": "No posts yet. Be the first!",
+    "allSolved": "All caught up — every request has been solved. Check the archive below.",
     "readAloud": "Read aloud",
     "stopReading": "Stop reading",
     "iCanHelp": "I can help",
     "markedHelped": "Thank you!",
-    "ago": "{{time}} ago"
+    "ago": "{{time}} ago",
+    "archive": {
+      "toggle": "Solved requests ({{count}})",
+      "toggle_one": "Solved request ({{count}})",
+      "toggle_other": "Solved requests ({{count}})"
+    }
   },
   "categories": {
     "help": "Help",
@@ -46,7 +52,14 @@
     "translating": "Translating...",
     "success": "Post sent",
     "queued": "Saved — will send when you're online",
-    "errorVoice": "Voice input not supported in this browser"
+    "errorVoice": "Voice input not supported in this browser",
+    "fromSearchHint": "From your search — edit before posting",
+    "successHeading": "Posted!",
+    "urgencyHeading": "Is this urgent?",
+    "urgencyOff": "Not urgent",
+    "urgencyOffHint": "We'll notify neighbours who are free right now.",
+    "urgencyOn": "Mark as urgent",
+    "urgencyOnHint": "Every helper in this category will be alerted right away, even if it's their off-hours."
   },
   "resources": {
     "title": "Local resources",
@@ -54,6 +67,29 @@
     "contact": "Contact",
     "hours": "Open",
     "directions": "Directions"
+  },
+  "search": {
+    "placeholder": "What do you need to find?",
+    "clear": "Clear",
+    "voice": "Speak to search",
+    "resultsTitle": "Search results",
+    "smartResults": "{{count}} relevant results (on-device search)",
+    "keywordResults": "{{count}} keyword matches (preparing offline search…)",
+    "matchBadge": "Matches your search",
+    "noResults": "Nothing found. Try different words or another language.",
+    "offlineNudge": {
+      "title": "Showing top matches only — you're offline",
+      "body": "Go online to see more results and to post a new request to the community."
+    },
+    "askCommunity": {
+      "emptyTitle": "No one has posted about this yet",
+      "emptyBody": "Ask the community for help with “{{query}}”. Neighbours nearby can answer.",
+      "followupTitle": "Still need help?",
+      "followupBody": "If none of these match, post your question and the community can reply.",
+      "cta": "Post this request",
+      "categoryHint": "We'll suggest the {{emoji}} {{category}} category — you can change it.",
+      "offlineHint": "You're offline. Come back online to post this to the community."
+    }
   },
   "settings": {
     "title": "Settings",
@@ -65,6 +101,211 @@
     "save": "Save",
     "saved": "Saved",
     "about": "About",
-    "aboutText": "OmniBridge connects neighbours, refugees and older residents for local help — with voice, icons and translation."
+    "aboutText": "OmniBridge connects neighbours, refugees and older residents for local help — with voice, icons and translation.",
+    "offlineReady": "Offline ready",
+    "offlinePackDownloading": "Downloading offline pack…",
+    "offlinePackDownloadingPct": "Downloading offline pack… {{progress}}%",
+    "offlinePackReady": "Offline search is ready",
+    "offlinePackError": "Offline pack download failed. Check your connection.",
+    "offlineDemo": "Offline demo mode",
+    "offlineDemoHint": "Simulates being offline for demos. Feed, search and read-aloud keep working.",
+    "accessibility": "Accessibility",
+    "fontSize": "Text size",
+    "fontSizeHint": "Make every label, post and reply bigger. Takes effect right away.",
+    "fontSizeOption": {
+      "md": "Normal",
+      "lg": "Large",
+      "xl": "Largest"
+    },
+    "reducedMotion": "Reduced motion",
+    "reducedMotionOn": "On — following your device setting. Animations are simplified.",
+    "reducedMotionOff": "Off — change this in your device settings if animations bother you.",
+    "helper": {
+      "title": "Helping neighbours",
+      "hint": "When you're free and a post matches what you can help with, we'll send a notification. You decide when to reply.",
+      "enabled": "I'm available to help",
+      "enabledHintOn": "On — we'll ping you for matching posts at the times you picked.",
+      "enabledHintOff": "Off — you won't get match pings. Reply notifications still work.",
+      "tagsLabel": "What I can help with",
+      "availabilityLabel": "When I'm usually free"
+    },
+    "points": {
+      "title": "Your thank-you points",
+      "totalOne": "{{count}} point",
+      "totalOther": "{{count}} points",
+      "hint": "You earn points each time a neighbour marks your help as complete.",
+      "zeroHint": "Reply to a post to earn your first thank-you points.",
+      "milestone": "That's a lot of help — thank you!"
+    }
+  },
+  "responses": {
+    "reply": "Reply",
+    "replyWithCount": "Reply ({{count}})",
+    "send": "Send",
+    "sent": "Reply sent",
+    "error": "Couldn't send reply, try again",
+    "placeholder": "Write a short reply…",
+    "anonymous": "Anonymous",
+    "you": "you",
+    "yourPost": "This is your post — replies appear here.",
+    "demoButton": "Send test push",
+    "demoHint": "Send a real Web Push to this device to demo the flow",
+    "demoSent": "Test push sent",
+    "demoUnavailable": "Enable notifications first",
+    "translatedFrom": "translated from {{lang}}",
+    "voiceReply": "Speak your reply",
+    "stopVoice": "Stop listening",
+    "listening": "Listening… speak your reply",
+    "yesICanHelp": "Yes, I can help",
+    "yesICanHelpHint": "One tap lets the asker know. They can then send you a private message.",
+    "offerBody": "I can help with this. Send me a private message to arrange a time.",
+    "offerReceivedTitle": "{{name}} is ready to help you",
+    "offerReceivedBody": "Tap below to send a private message and arrange a time.",
+    "sendPrivateMessage": "Send private message",
+    "thankPublicly": "Thank publicly",
+    "privatePlaceholder": "Private message to {{name}}",
+    "privateBadge": "Private",
+    "privateHint": "Only you and {{name}} can see these messages.",
+    "offerSent": "Thanks — the asker has been notified"
+  },
+  "languages": {
+    "sk": "Slovak",
+    "en": "English",
+    "ar": "Arabic",
+    "uk": "Ukrainian"
+  },
+  "onboarding": {
+    "title": "Welcome to OmniBridge",
+    "subtitle": "Pick your language and tell us what to call you.",
+    "languageLabel": "Your language",
+    "nameLabel": "Your name",
+    "namePlaceholder": "e.g. Mária",
+    "nameHint": "Shown on your posts and replies. You can change it later in Settings.",
+    "rerollEmoji": "Change emoji",
+    "voiceName": "Speak your name",
+    "stopVoice": "Stop listening",
+    "listening": "Listening… say your name",
+    "continue": "Continue",
+    "helper": {
+      "title": "Can you help your neighbours sometimes?",
+      "subtitle": "We'll only ping you when a neighbour posts something that matches what you can help with — and only when you said you're free.",
+      "tagsLabel": "What you can help with",
+      "tagsHint": "Tap any that sound like you. Tap again to remove.",
+      "availabilityLabel": "When are you usually free?",
+      "availabilityHint": "Tap the times that fit. We never share your schedule.",
+      "skip": "Not today",
+      "save": "Save and continue",
+      "back": "Back"
+    }
+  },
+  "days": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  },
+  "buckets": {
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening"
+  },
+  "notifications": {
+    "sectionTitle": "Notifications",
+    "sectionHint": "Get pinged on this device the moment a neighbour replies — even when OmniBridge is closed.",
+    "askTitle": "Want to know when neighbours reply?",
+    "askBody": "We'll send a notification straight to this phone — no email, no spam.",
+    "askYes": "Yes, notify me",
+    "askLater": "Not now",
+    "enable": "Enable",
+    "dismiss": "Got it",
+    "successTitle": "You're all set",
+    "successBody": "We'll notify you the moment someone replies to one of your posts.",
+    "deniedTitle": "Notifications are blocked",
+    "deniedBody": "Enable them in your browser settings (Site settings → Notifications) and come back here.",
+    "installTitle": "Add OmniBridge to your Home Screen first",
+    "installBody": "On iPhone, notifications work only after installing the app to your Home Screen via the Share menu → Add to Home Screen.",
+    "statusOn": "Notifications on for this device",
+    "statusOff": "Notifications are off",
+    "statusBlocked": "Blocked in browser settings",
+    "statusUnsupported": "Not supported in this browser",
+    "statusInstallNeeded": "Install to Home Screen to enable",
+    "statusMissingKey": "Server VAPID key missing"
+  },
+  "common": {
+    "back": "Back"
+  },
+  "push": {
+    "matchRequestTitle": "A neighbour needs help",
+    "matchRequestBody": "{{name}} asked: {{title}}",
+    "matchRequestBodyNoName": "Someone nearby asked: {{title}}",
+    "offerReceivedTitle": "{{name}} is ready to help",
+    "offerReceivedBody": "Open the post to send a private message."
+  },
+  "postCard": {
+    "alerted": "{{count}} neighbour alerted",
+    "alerted_plural": "{{count}} neighbours alerted",
+    "alertedNoneOutsideHours": "Saved — helpers will see it in the morning",
+    "alertedNoneNoHelpers": "Saved — no volunteers signed up yet for this kind of request",
+    "alertedNoneBusy": "Saved — no neighbours are free right now",
+    "urgent": "Urgent",
+    "urgentAria": "Urgent request: {{title}}"
+  },
+  "celebration": {
+    "title": "You just helped a neighbour",
+    "bodyGeneric": "+{{points}} thank-you points",
+    "bodyNamed": "{{name}} thanked you · +{{points}} points",
+    "close": "Close"
+  },
+  "resolve": {
+    "markSolved": "Mark as solved",
+    "dialogTitle": "Who helped you?",
+    "dialogHint": "Pick the neighbour who helped. They'll get a thank-you and {{points}} points.",
+    "offeredChip": "Offered to help",
+    "thankButton": "Thank {{name}}",
+    "noHelper": "No one specific",
+    "noHelperHint": "Close the post without sending a thank-you.",
+    "cancel": "Cancel",
+    "noResponders": "No one has replied yet. You can still close the post — neighbours will see it's solved.",
+    "solvedBadge": "Solved",
+    "solvedBy": "Solved with help from {{name}}",
+    "solvedByYou": "You marked this as solved",
+    "solvedLocked": "This request is closed — thanks to everyone who pitched in.",
+    "toastThanked": "Thank-you sent to {{name}} (+{{points}} points)",
+    "toastClosed": "Post marked as solved",
+    "toastError": "Couldn't mark as solved. Try again?"
+  },
+  "listen": {
+    "heroTitle": "Ask out loud",
+    "heroHint": "Tap, speak, and hear a neighbour who can help — in your language.",
+    "screenTitle": "Ask out loud",
+    "tapToSpeak": "Tap and tell me what you need",
+    "stop": "Stop listening",
+    "listening": "I'm listening…",
+    "listeningHint": "Speak now, I'll wait…",
+    "thinking": "Looking for neighbours who can help…",
+    "instructions": "Press the big button and say one sentence — for example, \"I need a ride to the clinic.\"",
+    "voiceIntro": "A neighbour said:",
+    "matchCounter": "Match {{index}} of {{total}}",
+    "thisHelps": "This helps — open",
+    "nextMatch": "Next match",
+    "askCommunityInstead": "None of these fit — ask the community",
+    "skipAll": "Close and start over",
+    "noMatchTitle": "No neighbour has posted about this yet",
+    "noMatchBody": "We couldn't find a match for “{{query}}”. Let's ask the community — we've filled in what you said.",
+    "noMatchSpoken": "No neighbour has answered this yet. Let's ask the community.",
+    "askCommunity": "Ask the community",
+    "tryAgain": "Try speaking again",
+    "useKeyboard": "Can't use voice? Type instead",
+    "keyboardLabel": "Type what you need help with",
+    "keyboardPlaceholder": "For example, I need help with groceries on Tuesdays",
+    "searchNow": "Find someone",
+    "mute": "Stop reading aloud",
+    "playAgain": "Read it to me again",
+    "errorVoice": "Voice input didn't work. Use the keyboard option below.",
+    "errorSearch": "Something went wrong finding a neighbour. Please try again.",
+    "youSaid": "You said:"
   }
 }

@@ -17,11 +17,19 @@
   "feed": {
     "title": "Nablízku v Košiciach",
     "empty": "Zatiaľ žiadne príspevky. Buďte prvý!",
+    "allSolved": "Všetko vybavené — všetky žiadosti sú vyriešené. Pozrite si archív nižšie.",
     "readAloud": "Prečítať nahlas",
     "stopReading": "Zastaviť čítanie",
     "iCanHelp": "Môžem pomôcť",
     "markedHelped": "Ďakujeme!",
-    "ago": "pred {{time}}"
+    "ago": "pred {{time}}",
+    "archive": {
+      "toggle": "Vyriešené žiadosti ({{count}})",
+      "toggle_one": "Vyriešená žiadosť ({{count}})",
+      "toggle_few": "Vyriešené žiadosti ({{count}})",
+      "toggle_many": "Vyriešených žiadostí ({{count}})",
+      "toggle_other": "Vyriešených žiadostí ({{count}})"
+    }
   },
   "categories": {
     "help": "Pomoc",
@@ -46,7 +54,14 @@
     "translating": "Prekladám...",
     "success": "Príspevok odoslaný",
     "queued": "Príspevok uložený — odošle sa keď budete online",
-    "errorVoice": "Hlasový vstup nie je dostupný v tomto prehliadači"
+    "errorVoice": "Hlasový vstup nie je dostupný v tomto prehliadači",
+    "fromSearchHint": "Z vášho vyhľadávania — pred odoslaním upravte",
+    "successHeading": "Uverejnené!",
+    "urgencyHeading": "Je to súrne?",
+    "urgencyOff": "Nie je to súrne",
+    "urgencyOffHint": "Upozorníme susedov, ktorí sú teraz voľní.",
+    "urgencyOn": "Označiť ako súrne",
+    "urgencyOnHint": "Upozorníme každého pomocníka v tejto kategórii, aj keď má voľno."
   },
   "resources": {
     "title": "Miestne zdroje",
@@ -54,6 +69,29 @@
     "contact": "Kontakt",
     "hours": "Otvorené",
     "directions": "Smer"
+  },
+  "search": {
+    "placeholder": "Čo potrebujete nájsť?",
+    "clear": "Vymazať",
+    "voice": "Hovorte pre vyhľadávanie",
+    "resultsTitle": "Výsledky vyhľadávania",
+    "smartResults": "{{count}} relevantných výsledkov (vyhľadávanie v zariadení)",
+    "keywordResults": "{{count}} kľúčových zhôd (pripravujem offline vyhľadávanie…)",
+    "matchBadge": "Zhoda s vašim vyhľadávaním",
+    "noResults": "Nenašlo sa nič. Skúste iné slová alebo iný jazyk.",
+    "offlineNudge": {
+      "title": "Zobrazujeme len najlepšie zhody — ste offline",
+      "body": "Pripojte sa na internet a uvidíte viac výsledkov a budete môcť pridať nový príspevok pre komunitu."
+    },
+    "askCommunity": {
+      "emptyTitle": "O tomto zatiaľ nikto nepísal",
+      "emptyBody": "Spýtajte sa komunity na „{{query}}“. Susedia v okolí vám môžu odpovedať.",
+      "followupTitle": "Stále potrebujete pomoc?",
+      "followupBody": "Ak vám nič nesedí, uverejnite svoju otázku a komunita vám môže odpovedať.",
+      "cta": "Uverejniť túto požiadavku",
+      "categoryHint": "Navrhneme kategóriu {{emoji}} {{category}} — môžete ju zmeniť.",
+      "offlineHint": "Ste offline. Keď budete opäť online, môžete túto požiadavku odoslať komunite."
+    }
   },
   "settings": {
     "title": "Nastavenia",
@@ -65,6 +103,211 @@
     "save": "Uložiť",
     "saved": "Uložené",
     "about": "O aplikácii",
-    "aboutText": "OmniBridge prepája obyvateľov, utečencov a starších susedov v miestnej pomoci — hlasom, obrázkami a prekladom."
+    "aboutText": "OmniBridge prepája obyvateľov, utečencov a starších susedov v miestnej pomoci — hlasom, obrázkami a prekladom.",
+    "offlineReady": "Pripravené offline",
+    "offlinePackDownloading": "Sťahuje sa offline balík…",
+    "offlinePackDownloadingPct": "Sťahuje sa offline balík… {{progress}}%",
+    "offlinePackReady": "Offline vyhľadávanie je pripravené",
+    "offlinePackError": "Offline balík sa nepodarilo stiahnuť. Skontrolujte pripojenie.",
+    "offlineDemo": "Demo režim offline",
+    "offlineDemoHint": "Simuluje stratu pripojenia pre demo. Feed, vyhľadávanie a čítanie nahlas naďalej fungujú.",
+    "accessibility": "Prístupnosť",
+    "fontSize": "Veľkosť textu",
+    "fontSizeHint": "Zväčší všetky nápisy, príspevky a odpovede. Zmena platí okamžite.",
+    "fontSizeOption": {
+      "md": "Normálna",
+      "lg": "Veľká",
+      "xl": "Najväčšia"
+    },
+    "reducedMotion": "Obmedzenie pohybu",
+    "reducedMotionOn": "Zapnuté — sledujeme nastavenie zariadenia. Animácie sú zjednodušené.",
+    "reducedMotionOff": "Vypnuté — zmeňte v nastaveniach zariadenia, ak vám animácie prekážajú.",
+    "helper": {
+      "title": "Pomoc susedom",
+      "hint": "Keď ste voľný/á a niekto uverejní príspevok, ktorý sedí s tým, s čím viete pomôcť, pošleme vám notifikáciu. Rozhodujete sa vy.",
+      "enabled": "Som ochotný/á pomôcť",
+      "enabledHintOn": "Zapnuté — pri vhodných príspevkoch vás upozorníme v čase, ktorý ste vybrali.",
+      "enabledHintOff": "Vypnuté — nebudeme vám posielať upozornenia na zhody. Odpovede na vaše príspevky stále chodia.",
+      "tagsLabel": "S čím viem pomôcť",
+      "availabilityLabel": "Kedy som zvyčajne voľný/á"
+    },
+    "points": {
+      "title": "Vaše body vďaky",
+      "totalOne": "{{count}} bod",
+      "totalOther": "{{count}} bodov",
+      "hint": "Body získavate vždy, keď sused označí vašu pomoc za dokončenú.",
+      "zeroHint": "Odpovedzte na príspevok a získajte svoje prvé body vďaky.",
+      "milestone": "Skvelá práca — ďakujeme!"
+    }
+  },
+  "responses": {
+    "reply": "Odpovedať",
+    "replyWithCount": "Odpovedať ({{count}})",
+    "send": "Odoslať",
+    "sent": "Odpoveď odoslaná",
+    "error": "Odpoveď sa nepodarilo odoslať, skúste znova",
+    "placeholder": "Napíšte krátku odpoveď…",
+    "anonymous": "Anonym",
+    "you": "vy",
+    "yourPost": "Toto je váš príspevok — odpovede sa zobrazia tu.",
+    "demoButton": "Poslať testovaciu notifikáciu",
+    "demoHint": "Pošle skutočnú Web Push notifikáciu na toto zariadenie pre demo",
+    "demoSent": "Testovacia notifikácia odoslaná",
+    "demoUnavailable": "Najprv povoľte notifikácie",
+    "translatedFrom": "preložené z {{lang}}",
+    "voiceReply": "Povedzte odpoveď",
+    "stopVoice": "Zastaviť nahrávanie",
+    "listening": "Počúvam… povedzte svoju odpoveď",
+    "yesICanHelp": "Áno, viem pomôcť",
+    "yesICanHelpHint": "Jedným ťuknutím dáte vedieť autorovi. Potom vám môže poslať súkromnú správu.",
+    "offerBody": "Môžem vám s tým pomôcť. Napíšte mi súkromnú správu a dohodneme si čas.",
+    "offerReceivedTitle": "{{name}} je pripravený/á vám pomôcť",
+    "offerReceivedBody": "Stlačte nižšie a pošlite súkromnú správu na dohodnutie času.",
+    "sendPrivateMessage": "Poslať súkromnú správu",
+    "thankPublicly": "Verejne poďakovať",
+    "privatePlaceholder": "Súkromná správa pre {{name}}",
+    "privateBadge": "Súkromné",
+    "privateHint": "Tieto správy vidíte iba vy a {{name}}.",
+    "offerSent": "Ďakujeme — autor príspevku bol upozornený"
+  },
+  "languages": {
+    "sk": "slovenčiny",
+    "en": "angličtiny",
+    "ar": "arabčiny",
+    "uk": "ukrajinčiny"
+  },
+  "onboarding": {
+    "title": "Vitajte v OmniBridge",
+    "subtitle": "Vyberte si jazyk a povedzte nám, ako vás máme oslovovať.",
+    "languageLabel": "Váš jazyk",
+    "nameLabel": "Vaše meno",
+    "namePlaceholder": "napr. Mária",
+    "nameHint": "Zobrazí sa pri vašich príspevkoch a odpovediach. Môžete to kedykoľvek zmeniť v nastaveniach.",
+    "rerollEmoji": "Zmeniť emoji",
+    "voiceName": "Povedzte svoje meno",
+    "stopVoice": "Zastaviť nahrávanie",
+    "listening": "Počúvam… povedzte svoje meno",
+    "continue": "Pokračovať",
+    "helper": {
+      "title": "Vedeli by ste niekedy pomôcť susedom?",
+      "subtitle": "Upozorníme vás len vtedy, keď niekto uverejní príspevok, ktorý sedí s tým, s čím viete pomôcť — a len v čase, kedy ste voľný/á.",
+      "tagsLabel": "S čím viete pomôcť",
+      "tagsHint": "Stlačte, čo vám sedí. Ďalším stlačením zrušíte.",
+      "availabilityLabel": "Kedy ste zvyčajne voľný/á?",
+      "availabilityHint": "Stlačte časy, ktoré vám vyhovujú. Váš rozvrh s nikým nezdieľame.",
+      "skip": "Teraz nie",
+      "save": "Uložiť a pokračovať",
+      "back": "Späť"
+    }
+  },
+  "days": {
+    "mon": "Po",
+    "tue": "Ut",
+    "wed": "St",
+    "thu": "Št",
+    "fri": "Pi",
+    "sat": "So",
+    "sun": "Ne"
+  },
+  "buckets": {
+    "morning": "Ráno",
+    "afternoon": "Poobede",
+    "evening": "Večer"
+  },
+  "notifications": {
+    "sectionTitle": "Notifikácie",
+    "sectionHint": "Dostanete upozornenie na tomto zariadení hneď ako sused odpovie — aj keď je OmniBridge zatvorený.",
+    "askTitle": "Chcete vedieť, keď susedia odpovedia?",
+    "askBody": "Pošleme notifikáciu priamo na tento telefón — žiadne maily, žiadny spam.",
+    "askYes": "Áno, upozorniť",
+    "askLater": "Teraz nie",
+    "enable": "Povoliť",
+    "dismiss": "Rozumiem",
+    "successTitle": "Hotovo",
+    "successBody": "Upozorníme vás hneď ako niekto odpovie na váš príspevok.",
+    "deniedTitle": "Notifikácie sú zablokované",
+    "deniedBody": "Povolte ich v nastaveniach prehliadača (Nastavenia stránky → Notifikácie) a vráťte sa sem.",
+    "installTitle": "Najprv pridajte OmniBridge na plochu",
+    "installBody": "Na iPhone notifikácie fungujú až po pridaní aplikácie na plochu cez ponuku Zdieľať → Pridať na plochu.",
+    "statusOn": "Notifikácie sú zapnuté na tomto zariadení",
+    "statusOff": "Notifikácie sú vypnuté",
+    "statusBlocked": "Zablokované v nastaveniach prehliadača",
+    "statusUnsupported": "Nie je podporované v tomto prehliadači",
+    "statusInstallNeeded": "Najprv pridajte na plochu",
+    "statusMissingKey": "Chýba serverový VAPID kľúč"
+  },
+  "common": {
+    "back": "Späť"
+  },
+  "push": {
+    "matchRequestTitle": "Sused potrebuje pomoc",
+    "matchRequestBody": "{{name}} hľadá: {{title}}",
+    "matchRequestBodyNoName": "Niekto v okolí hľadá: {{title}}",
+    "offerReceivedTitle": "{{name}} je pripravený/á pomôcť",
+    "offerReceivedBody": "Otvorte príspevok a pošlite súkromnú správu."
+  },
+  "postCard": {
+    "alerted": "Upozornený {{count}} sused",
+    "alerted_plural": "Upozornených {{count}} susedov",
+    "alertedNoneOutsideHours": "Uložené — susedia to uvidia ráno",
+    "alertedNoneNoHelpers": "Uložené — pre túto kategóriu sa zatiaľ neprihlásil žiadny dobrovoľník",
+    "alertedNoneBusy": "Uložené — teraz nie sú voľní žiadni susedia",
+    "urgent": "Súrne",
+    "urgentAria": "Súrna žiadosť: {{title}}"
+  },
+  "celebration": {
+    "title": "Práve ste pomohli susedovi",
+    "bodyGeneric": "+{{points}} bodov vďaky",
+    "bodyNamed": "{{name}} vám ďakuje · +{{points}} bodov",
+    "close": "Zavrieť"
+  },
+  "resolve": {
+    "markSolved": "Označiť ako vyriešené",
+    "dialogTitle": "Kto vám pomohol?",
+    "dialogHint": "Vyberte suseda, ktorý vám pomohol. Pošleme mu poďakovanie a {{points}} bodov.",
+    "offeredChip": "Ponúkol/a pomoc",
+    "thankButton": "Poďakovať — {{name}}",
+    "noHelper": "Nikto konkrétne",
+    "noHelperHint": "Zavrieť príspevok bez poslania poďakovania.",
+    "cancel": "Zrušiť",
+    "noResponders": "Zatiaľ nikto neodpovedal. Príspevok môžete zavrieť aj tak — susedia uvidia, že je vyriešený.",
+    "solvedBadge": "Vyriešené",
+    "solvedBy": "Vyriešené vďaka {{name}}",
+    "solvedByYou": "Označili ste to ako vyriešené",
+    "solvedLocked": "Žiadosť je uzavretá — ďakujeme každému, kto pomohol.",
+    "toastThanked": "Poďakovanie odoslané — {{name}} (+{{points}} bodov)",
+    "toastClosed": "Príspevok označený ako vyriešený",
+    "toastError": "Nepodarilo sa to označiť. Skúsite znova?"
+  },
+  "listen": {
+    "heroTitle": "Opýtať sa nahlas",
+    "heroHint": "Stlačte, povedzte — a vypočujte si suseda, ktorý vám vie pomôcť. Vo vašom jazyku.",
+    "screenTitle": "Opýtať sa nahlas",
+    "tapToSpeak": "Stlačte a povedzte, čo potrebujete",
+    "stop": "Prestať počúvať",
+    "listening": "Počúvam…",
+    "listeningHint": "Hovorte, počkám…",
+    "thinking": "Hľadám susedov, ktorí vedia pomôcť…",
+    "instructions": "Stlačte veľké tlačidlo a povedzte jednu vetu — napríklad „Potrebujem odvoz na polikliniku.“",
+    "voiceIntro": "Sused napísal:",
+    "matchCounter": "Zhoda {{index}} z {{total}}",
+    "thisHelps": "Toto mi pomôže — otvoriť",
+    "nextMatch": "Ďalšia zhoda",
+    "askCommunityInstead": "Nič z toho — opýtať sa komunity",
+    "skipAll": "Zavrieť a začať znova",
+    "noMatchTitle": "Zatiaľ o tomto nikto nepísal",
+    "noMatchBody": "Nenašli sme nič k „{{query}}“. Opýtajme sa komunity — text sme už pripravili.",
+    "noMatchSpoken": "Zatiaľ o tomto nikto nepísal. Opýtajme sa komunity.",
+    "askCommunity": "Opýtať sa komunity",
+    "tryAgain": "Skúsiť nahovoriť znova",
+    "useKeyboard": "Nemôžete hovoriť? Napíšte namiesto toho",
+    "keyboardLabel": "Napíšte s čím potrebujete pomôcť",
+    "keyboardPlaceholder": "Napríklad, potrebujem pomôcť s nákupom v utorok",
+    "searchNow": "Nájsť niekoho",
+    "mute": "Prestať čítať nahlas",
+    "playAgain": "Prečítajte mi to znova",
+    "errorVoice": "Hlasový vstup nefunguje. Použite klávesnicu nižšie.",
+    "errorSearch": "Pri hľadaní suseda nastala chyba. Skúste znova.",
+    "youSaid": "Povedali ste:"
   }
 }
