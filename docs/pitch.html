@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OmniBridge — 3-minute pitch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #14120e;
+        --paper: #fdf9f2;
+        --amber: #ea8b1a;
+        --coral: #e4573e;
+        --plum: #4c2340;
+        --sage: #5f8a6a;
+        --muted: #7a736a;
+        --shadow: 0 30px 60px -20px rgba(20, 18, 14, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: clamp(15px, 1.2vw, 20px);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Grainy paper texture overlay — gives the whole deck a tactile feel. */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(
+            circle at 25% 30%,
+            rgba(228, 87, 62, 0.04),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(234, 139, 26, 0.05),
+            transparent 45%
+          );
+        z-index: 0;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 4vh 6vw;
+      }
+
+      .slide {
+        display: none;
+        width: 100%;
+        max-width: 1100px;
+        animation: slide-in 520ms cubic-bezier(0.22, 0.8, 0.3, 1);
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes slide-in {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .eyebrow {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral);
+        margin: 0 0 1.2rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Fraunces", Georgia, serif;
+        font-weight: 900;
+        font-variation-settings: "SOFT" 60;
+        line-height: 1.02;
+        margin: 0 0 1.5rem;
+        letter-spacing: -0.02em;
+      }
+
+      h1 {
+        font-size: clamp(3.5rem, 8vw, 7rem);
+      }
+
+      h2 {
+        font-size: clamp(2.4rem, 5vw, 4.2rem);
+      }
+
+      h3 {
+        font-size: clamp(1.4rem, 2.4vw, 2rem);
+      }
+
+      p,
+      li {
+        font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      }
+
+      .lede {
+        font-family: "Fraunces", serif;
+        font-weight: 400;
+        font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+        line-height: 1.3;
+        color: var(--ink);
+      }
+
+      .soundbite {
+        display: inline-block;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 0.6rem 1.3rem;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+        margin-top: 1.5rem;
+      }
+
+      .pill {
+        display: inline-block;
+        background: var(--amber);
+        color: var(--ink);
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @media (max-width: 800px) {
+        .grid-2,
+        .grid-3,
+        .grid-4 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid rgba(20, 18, 14, 0.08);
+        border-radius: 20px;
+        padding: 1.6rem 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .card.amber {
+        background: #fff7e9;
+        border-color: rgba(234, 139, 26, 0.3);
+      }
+
+      .card.coral {
+        background: #fde4dd;
+        border-color: rgba(228, 87, 62, 0.3);
+      }
+
+      .card.sage {
+        background: #e4eee6;
+        border-color: rgba(95, 138, 106, 0.35);
+      }
+
+      .card.plum {
+        background: #f3e4ee;
+        border-color: rgba(76, 35, 64, 0.25);
+      }
+
+      .card-title {
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin: 0.4rem 0 0.6rem;
+        line-height: 1.1;
+      }
+
+      .card-icon {
+        font-size: 2.4rem;
+        line-height: 1;
+      }
+
+      ul.tight {
+        padding-left: 1.1rem;
+        margin: 0.8rem 0;
+      }
+      ul.tight li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* ---------------- Top bar: progress + timer + counter ---------------- */
+
+      .hud {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem 1.2rem;
+        background: rgba(253, 249, 242, 0.88);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(20, 18, 14, 0.06);
+        z-index: 20;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .hud .brand {
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+
+      .hud .brand em {
+        font-style: normal;
+        color: var(--coral);
+      }
+
+      .hud .timer {
+        font-variant-numeric: tabular-nums;
+        color: var(--muted);
+      }
+
+      .hud .timer.live {
+        color: var(--ink);
+      }
+      .hud .timer.warn {
+        color: var(--amber);
+      }
+      .hud .timer.over {
+        color: var(--coral);
+      }
+
+      .hud .progress {
+        flex: 1;
+        height: 6px;
+        background: rgba(20, 18, 14, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hud .progress > span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--amber), var(--coral));
+        border-radius: 999px;
+        transition: width 500ms linear;
+      }
+
+      .hud .counter {
+        font-variant-numeric: tabular-nums;
+        color: var(--muted);
+      }
+
+      /* ---------------- Nav buttons ---------------- */
+
+      .nav {
+        position: fixed;
+        bottom: 1.2rem;
+        right: 1.2rem;
+        display: flex;
+        gap: 0.5rem;
+        z-index: 20;
+      }
+
+      .nav button {
+        background: var(--ink);
+        color: var(--paper);
+        border: 0;
+        border-radius: 999px;
+        padding: 0.7rem 1.1rem;
+        font-family: inherit;
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+        box-shadow: 0 8px 20px -10px rgba(20, 18, 14, 0.4);
+      }
+
+      .nav button:hover {
+        background: var(--coral);
+      }
+
+      .hint {
+        position: fixed;
+        bottom: 1.4rem;
+        left: 1.4rem;
+        z-index: 20;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-family: "IBM Plex Sans", monospace;
+      }
+
+      .hint kbd {
+        font-family: "IBM Plex Sans", sans-serif;
+        background: #fff;
+        border: 1px solid rgba(20, 18, 14, 0.15);
+        border-radius: 6px;
+        padding: 0.15rem 0.45rem;
+        font-size: 0.75rem;
+        margin: 0 0.15rem;
+        box-shadow: 0 1px 0 rgba(20, 18, 14, 0.08);
+      }
+
+      /* ---------------- Speaker notes drawer ---------------- */
+
+      .notes {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%) translateY(120%);
+        bottom: 0;
+        width: min(900px, 94vw);
+        max-height: 50vh;
+        overflow: auto;
+        background: var(--ink);
+        color: var(--paper);
+        border-radius: 24px 24px 0 0;
+        padding: 1.4rem 1.8rem 1.8rem;
+        box-shadow: 0 -30px 60px -20px rgba(20, 18, 14, 0.35);
+        transition: transform 320ms cubic-bezier(0.22, 0.8, 0.3, 1);
+        z-index: 30;
+      }
+
+      .notes.open {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .notes h4 {
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0 0 0.7rem;
+        color: var(--amber);
+        letter-spacing: 0.01em;
+      }
+
+      .notes p,
+      .notes li {
+        font-size: 0.98rem;
+        line-height: 1.55;
+      }
+
+      .notes .t {
+        color: var(--amber);
+        font-weight: 700;
+      }
+
+      .notes blockquote {
+        margin: 0.5rem 0;
+        padding: 0.6rem 1rem;
+        border-left: 3px solid var(--amber);
+        font-style: italic;
+        color: #fdeac3;
+      }
+
+      /* ---------------- Slide-specific layouts ---------------- */
+
+      /* Slide 1 – title */
+
+      .title-slide h1 {
+        margin-bottom: 0;
+      }
+
+      .title-slide .accent {
+        color: var(--coral);
+      }
+
+      .lang-chip-row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .lang-chip {
+        background: #fff;
+        border: 1px solid rgba(20, 18, 14, 0.08);
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .lang-chip span.flag {
+        font-size: 1.05rem;
+      }
+
+      .lang-chip[dir="rtl"] {
+        font-family: "Noto Sans Arabic", sans-serif;
+      }
+
+      /* Slide – flipped defaults grid */
+
+      .flipped-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .flipped-item .icon {
+        font-size: 2.2rem;
+        line-height: 1;
+      }
+
+      .flipped-item h4 {
+        margin: 0 0 0.3rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.4rem;
+      }
+
+      .flipped-item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* Demo beat slides */
+
+      .demo-slide {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .demo-slide {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .demo-slide .copy h2 {
+        margin-bottom: 1.2rem;
+      }
+
+      .demo-slide .copy .beat-num {
+        display: inline-block;
+        font-family: "Fraunces", serif;
+        font-weight: 900;
+        font-size: 1.05rem;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        margin-bottom: 1rem;
+      }
+
+      .demo-slide .copy .soundbite {
+        margin-top: 1.5rem;
+      }
+
+      /* Phone mockup — playful, not a literal device chrome */
+
+      .phones {
+        position: relative;
+        min-height: 440px;
+        display: grid;
+        place-items: center;
+      }
+
+      .phone {
+        position: absolute;
+        width: 250px;
+        height: 440px;
+        background: #fff;
+        border-radius: 36px;
+        border: 3px solid var(--ink);
+        padding: 1.2rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .phone .phone-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .phone h5 {
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      .phone .bubble {
+        padding: 0.8rem 0.95rem;
+        border-radius: 14px;
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+
+      .phone .bubble.user {
+        background: #fde4dd;
+        border: 1px solid rgba(228, 87, 62, 0.25);
+      }
+
+      .phone .bubble.system {
+        background: var(--ink);
+        color: var(--paper);
+        align-self: stretch;
+      }
+
+      .phone .bubble.amber {
+        background: #fff7e9;
+        border: 1px solid rgba(234, 139, 26, 0.35);
+      }
+
+      .phone .bubble.sage {
+        background: #e4eee6;
+        border: 1px solid rgba(95, 138, 106, 0.3);
+      }
+
+      .phone .bubble .name {
+        font-weight: 700;
+        margin-bottom: 0.15rem;
+      }
+
+      .phone .big-mic {
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--coral);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 2.4rem;
+        box-shadow: 0 12px 30px -10px rgba(228, 87, 62, 0.6);
+      }
+
+      .phone.marta {
+        transform: translate(-70px, -10px) rotate(-4deg);
+      }
+
+      .phone.jana {
+        transform: translate(80px, 20px) rotate(3deg);
+      }
+
+      @media (max-width: 900px) {
+        .phones {
+          min-height: 260px;
+        }
+        .phone {
+          width: 200px;
+          height: 360px;
+          padding: 1rem;
+        }
+        .phone.marta {
+          transform: translate(-40px, 0) rotate(-4deg) scale(0.9);
+        }
+        .phone.jana {
+          transform: translate(40px, 20px) rotate(3deg) scale(0.9);
+        }
+      }
+
+      /* Urgent phone variant */
+
+      .phone.urgent {
+        border-color: var(--coral);
+        box-shadow:
+          0 0 0 3px rgba(228, 87, 62, 0.1),
+          var(--shadow);
+      }
+
+      .phone.urgent .phone-tag {
+        color: var(--coral);
+      }
+
+      /* Confetti phone — pseudo particles */
+
+      .phone.celebrate {
+        border-color: var(--sage);
+      }
+
+      .phone.celebrate .confetti-wrap {
+        position: relative;
+        flex: 1;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .phone.celebrate .confetti-wrap .points {
+        font-family: "Fraunces", serif;
+        font-weight: 900;
+        font-size: 3.2rem;
+        color: var(--sage);
+        text-align: center;
+      }
+
+      .phone.celebrate .confetti-wrap::before,
+      .phone.celebrate .confetti-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(circle at 20% 30%, var(--amber) 2px, transparent 3px),
+          radial-gradient(circle at 70% 15%, var(--coral) 2px, transparent 3px),
+          radial-gradient(circle at 40% 70%, var(--sage) 2px, transparent 3px),
+          radial-gradient(circle at 85% 85%, var(--plum) 2px, transparent 3px),
+          radial-gradient(circle at 10% 80%, var(--amber) 2px, transparent 3px),
+          radial-gradient(circle at 55% 50%, var(--coral) 2px, transparent 3px);
+        background-size: 60% 60%;
+        opacity: 0.75;
+      }
+
+      /* Tech stack slide */
+
+      .stack-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      @media (max-width: 900px) {
+        .stack-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .stack-item {
+        background: #fff;
+        border: 1px solid rgba(20, 18, 14, 0.08);
+        border-radius: 16px;
+        padding: 1rem 1.1rem;
+      }
+
+      .stack-item .icon {
+        font-size: 1.7rem;
+        line-height: 1;
+      }
+
+      .stack-item h5 {
+        margin: 0.5rem 0 0.25rem;
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+
+      .stack-item p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .stack-punchline {
+        margin-top: 2rem;
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        color: var(--ink);
+      }
+
+      .stack-punchline em {
+        color: var(--coral);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      /* Close slide */
+
+      .close-slide {
+        text-align: center;
+      }
+
+      .close-slide h1 {
+        font-size: clamp(3rem, 6vw, 5.2rem);
+      }
+
+      .close-slide .tagline {
+        margin-top: 1.8rem;
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+        color: var(--muted);
+      }
+
+      /* Print — single-page cheat sheet */
+
+      @media print {
+        .hud,
+        .nav,
+        .hint {
+          display: none !important;
+        }
+        .slide {
+          display: block !important;
+          page-break-after: always;
+          max-width: 100%;
+          padding: 2rem 0;
+        }
+        body {
+          background: #fff;
+        }
+        .notes {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hud">
+      <div class="brand">Omni<em>Bridge</em></div>
+      <div class="progress"><span id="progress-bar"></span></div>
+      <div class="timer" id="timer">0:00 / 3:00</div>
+      <div class="counter" id="counter">1 / 9</div>
+    </div>
+
+    <main id="deck">
+      <!-- ========= 1. Title ========= -->
+      <section class="slide title-slide active" data-target="0:20">
+        <p class="eyebrow">Kosice · hackathon pitch</p>
+        <h1>
+          Not a feed.<br />
+          A <span class="accent">matchmaker.</span>
+        </h1>
+        <p class="lede" style="max-width: 820px; margin-top: 2rem">
+          OmniBridge pairs elderly and refugee neighbours with the right
+          volunteer in real time — in a language they actually speak.
+        </p>
+        <div class="lang-chip-row" aria-label="Supported languages">
+          <span class="lang-chip"><span class="flag">🇸🇰</span> Slovensky</span>
+          <span class="lang-chip"><span class="flag">🇬🇧</span> English</span>
+          <span class="lang-chip" dir="rtl">
+            <span class="flag">🇸🇦</span> العربية
+          </span>
+          <span class="lang-chip"><span class="flag">🇺🇦</span> Українська</span>
+        </div>
+      </section>
+
+      <!-- ========= 2. Problem ========= -->
+      <section class="slide" data-target="0:45">
+        <p class="eyebrow">The problem</p>
+        <h2>Most apps were built for people<br />who don't need this app.</h2>
+        <p
+          class="lede"
+          style="max-width: 820px; color: var(--muted); margin-bottom: 2.2rem"
+        >
+          So we flipped every default.
+        </p>
+        <div class="grid grid-4">
+          <div class="flipped-item">
+            <div class="icon">🗣️</div>
+            <div>
+              <h4>Language</h4>
+              <p>SK · EN · AR · UK, translated automatically.</p>
+            </div>
+          </div>
+          <div class="flipped-item">
+            <div class="icon">🎙️</div>
+            <div>
+              <h4>Voice-first</h4>
+              <p>One giant mic. No forms, no typing.</p>
+            </div>
+          </div>
+          <div class="flipped-item">
+            <div class="icon">📴</div>
+            <div>
+              <h4>Offline-ready</h4>
+              <p>Works on a bus, basement, pre-paid SIM.</p>
+            </div>
+          </div>
+          <div class="flipped-item">
+            <div class="icon">🤝</div>
+            <div>
+              <h4>Matchmaking</h4>
+              <p>The app finds the right neighbour for you.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 3. Demo beat 1 — Voice + auto-translate ========= -->
+      <section class="slide" data-target="1:05">
+        <div class="demo-slide">
+          <div class="copy">
+            <span class="beat-num">Demo · beat 1 / 4</span>
+            <h2>Ask in Arabic.<br />Read in Slovak.</h2>
+            <p>
+              Marta speaks into one big mic. The post appears instantly in the
+              feed — the translation backfills seconds later.
+            </p>
+            <p class="soundbite">UI never waits on an LLM.</p>
+          </div>
+          <div class="phones">
+            <div class="phone marta">
+              <div class="phone-tag">Marta · 🇸🇦 → 🇸🇰</div>
+              <div class="big-mic" aria-hidden>🎙️</div>
+              <div class="bubble user" dir="rtl">
+                أحتاج مساعدة لشراء أدوية
+              </div>
+              <div class="bubble amber">
+                <div class="name">Auto-translated</div>
+                Potrebujem pomoc s kúpou liekov
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 4. Demo beat 2 — Match + private DM ========= -->
+      <section class="slide" data-target="1:35">
+        <div class="demo-slide">
+          <div class="copy">
+            <span class="beat-num">Demo · beat 2 / 4</span>
+            <h2>The match<br />happens.</h2>
+            <p>
+              Only neighbours who opted in for
+              <em>groceries · Tue mornings</em> get pinged. One tap: "Yes, I can
+              help." A private 1-to-1 thread opens — no public chat.
+            </p>
+            <p class="soundbite">Notice board → matchmaker.</p>
+          </div>
+          <div class="phones">
+            <div class="phone jana">
+              <div class="phone-tag">Jana · helper</div>
+              <div class="bubble system">
+                🔔 Marta needs help with groceries
+              </div>
+              <div class="bubble sage">
+                <div class="name">One-tap reply</div>
+                ✓ Yes, I can help
+              </div>
+              <div class="bubble amber">
+                <div class="name">Private thread opens</div>
+                "Hi Marta — I'm heading to Tesco at 10am."
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 5. Demo beat 3 — Urgent ========= -->
+      <section class="slide" data-target="2:00">
+        <div class="demo-slide">
+          <div class="copy">
+            <span class="beat-num">Demo · beat 3 / 4</span>
+            <h2>For emergencies,<br />hours don't matter.</h2>
+            <p>
+              Tap the red urgent toggle. Every helper in the category gets
+              pinged
+              <em>even outside their declared availability</em> — with a
+              distinct vibration pattern so they know it's serious.
+            </p>
+            <p class="soundbite">Time-of-day as matching logic.</p>
+          </div>
+          <div class="phones">
+            <div class="phone urgent">
+              <div class="phone-tag">🚨 URGENT</div>
+              <h5>Fallen outside my flat, cannot stand.</h5>
+              <div class="bubble user" style="background: #fde4dd">
+                "Bypassing quiet hours — pinging every opted-in helper."
+              </div>
+              <div class="bubble system" style="background: var(--coral)">
+                📳 📳 📳 &nbsp; all helpers alerted
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 6. Demo beat 4 — Confetti ========= -->
+      <section class="slide" data-target="2:20">
+        <div class="demo-slide">
+          <div class="copy">
+            <span class="beat-num">Demo · beat 4 / 4</span>
+            <h2>The thank-you<br />moment.</h2>
+            <p>
+              Marta marks the post solved and thanks Jana. Jana's phone —
+              anywhere in the world — bursts into confetti and shows
+              <strong>+10 points</strong>, live via Supabase Realtime.
+            </p>
+            <p class="soundbite">"A human was helped because of you."</p>
+          </div>
+          <div class="phones">
+            <div class="phone celebrate">
+              <div class="phone-tag">🎉 Jana · Thanked</div>
+              <h5>You just helped a neighbour.</h5>
+              <div class="confetti-wrap">
+                <div class="points">+10<br /><small style="font-size:1rem;color:var(--muted);font-weight:400">thank-you points</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 7. Tech stack ========= -->
+      <section class="slide" data-target="2:40">
+        <p class="eyebrow">Under the hood</p>
+        <h2>Quietly complex,<br />so the UX can stay simple.</h2>
+        <div class="stack-grid" style="margin-top: 2rem">
+          <div class="stack-item">
+            <div class="icon">📱</div>
+            <h5>React PWA</h5>
+            <p>Installs from URL, works offline, push when closed.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🗄️</div>
+            <h5>Dexie / IndexedDB</h5>
+            <p>Local cache + outbox for offline posts.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🧠</div>
+            <h5>On-device embeddings</h5>
+            <p>Cross-language search in all 4 languages, offline.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🌐</div>
+            <h5>Gemini 1.5 Flash</h5>
+            <p>Server-side translation, fire-and-forget.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">⚡</div>
+            <h5>Supabase Realtime</h5>
+            <p>Live thank-you confetti + points updates.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🎯</div>
+            <h5>Match engine</h5>
+            <p>Category + availability + timezone + urgency.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔔</div>
+            <h5>Web Push + VAPID</h5>
+            <p>Custom service worker, urgency-aware.</p>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🛰️</div>
+            <h5>Vercel edge + node</h5>
+            <p>/translate, /match, /notify, /resolve.</p>
+          </div>
+        </div>
+        <p class="stack-punchline">
+          Client sends <em>its own timezone</em>. Fetches use
+          <em>keepalive</em> so mobile locks don't cancel pushes. LLM calls run
+          in the background so the feed feels <em>instant</em>.
+        </p>
+      </section>
+
+      <!-- ========= 8. Impact ========= -->
+      <section class="slide" data-target="2:55">
+        <p class="eyebrow">Why this matters</p>
+        <h2>One PWA.<br />Every rural municipality.<br />Tomorrow.</h2>
+        <div class="grid grid-3" style="margin-top: 2rem">
+          <div class="card amber">
+            <div class="card-icon">👵</div>
+            <div class="card-title">Elderly neighbours</div>
+            <p>
+              Get help in their native Slovak before the pharmacy closes.
+            </p>
+          </div>
+          <div class="card coral">
+            <div class="card-icon">🧳</div>
+            <div class="card-title">Refugees</div>
+            <p>Find resources in Arabic or Ukrainian, ask without shame.</p>
+          </div>
+          <div class="card sage">
+            <div class="card-icon">🤝</div>
+            <div class="card-title">Volunteers</div>
+            <p>One-tap help, earned thanks, zero noise.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========= 9. Close ========= -->
+      <section class="slide close-slide" data-target="3:00">
+        <p class="eyebrow">Thank you</p>
+        <h1>
+          A neighbourhood,<br />back into a
+          <span style="color: var(--coral)">neighbourhood.</span>
+        </h1>
+        <p class="tagline">
+          Try it now: <strong>omnibridge-sooty.vercel.app</strong>
+        </p>
+        <div class="lang-chip-row" style="justify-content: center">
+          <span class="lang-chip"><span class="flag">🇸🇰</span> Slovensky</span>
+          <span class="lang-chip"><span class="flag">🇬🇧</span> English</span>
+          <span class="lang-chip" dir="rtl">
+            <span class="flag">🇸🇦</span> العربية
+          </span>
+          <span class="lang-chip"><span class="flag">🇺🇦</span> Українська</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Speaker notes overlay (press N) -->
+    <div class="notes" id="notes" aria-hidden="true">
+      <h4 id="notes-title">Speaker notes</h4>
+      <div id="notes-body"></div>
+    </div>
+
+    <!-- Floating nav -->
+    <div class="nav">
+      <button id="prev-btn" type="button" aria-label="Previous slide">←</button>
+      <button id="next-btn" type="button" aria-label="Next slide">Next →</button>
+    </div>
+
+    <div class="hint">
+      <kbd>←</kbd><kbd>→</kbd> nav · <kbd>Space</kbd> next · <kbd>N</kbd> notes
+      · <kbd>T</kbd> start timer · <kbd>R</kbd> reset
+    </div>
+
+    <script>
+      // ---------------------------------------------------------------
+      // Speaker notes — keyed by slide index. Each entry is an object
+      // with a short heading (the moment we're targeting) and the tight
+      // lines to say. Written to match the docs/pitch-3min.md script so
+      // rehearsal and delivery don't drift.
+      // ---------------------------------------------------------------
+      const NOTES = [
+        {
+          target: "0:00 – 0:20 · Hook",
+          html: `
+            <blockquote>
+              "Imagine you're 78, your pharmacy is closed, you don't have family
+              nearby — and your phone only speaks a language you barely read.
+              That's an ordinary Tuesday for thousands of elderly neighbours and
+              newly-arrived refugees in places like Košice.
+              <br /><br />
+              <strong>OmniBridge</strong> is a voice-first, offline-capable
+              community app that matches them, in real time, with a neighbour
+              who can help — in their own language."
+            </blockquote>
+            <p><strong>Tone:</strong> slow, warm, look at the judges. Don't rush the hook — the whole pitch depends on them caring about Marta.</p>
+          `,
+        },
+        {
+          target: "0:20 – 0:45 · Problem",
+          html: `
+            <p>Short, punchy. Four beats, name each one:</p>
+            <ul>
+              <li><span class="t">Language.</span> Auto-translated SK / EN / AR / UK.</li>
+              <li><span class="t">Voice.</span> One giant mic. No forms.</li>
+              <li><span class="t">Offline.</span> Bus, basement, pre-paid SIM.</li>
+              <li><span class="t">Matching.</span> Not a feed to scroll — we find the right neighbour for you.</li>
+            </ul>
+            <p>If running long, drop to just <em>Language</em> and <em>Matching</em>.</p>
+          `,
+        },
+        {
+          target: "0:45 – 1:05 · Demo beat 1 — Voice + translate",
+          html: `
+            <p><strong>Show Marta's phone.</strong> Tap mic, speak Arabic:
+            "أحتاج مساعدة لشراء أدوية" (I need help buying medicine).</p>
+            <p>Point out: post appears <em>instantly</em> in Arabic. Switch UI to Slovak → same post reads "Potrebujem pomoc s kúpou liekov".</p>
+            <blockquote>
+              "Translation happened server-side with an LLM — but the UI didn't
+              block. Post was in the feed, and a notification went out, before
+              the translation came back."
+            </blockquote>
+          `,
+        },
+        {
+          target: "1:05 – 1:35 · Demo beat 2 — Match + private DM",
+          html: `
+            <p><strong>Switch to Jana's phone.</strong> The push notification is
+            already there.</p>
+            <p>Tap → one giant "Yes, I can help" button. Tap.</p>
+            <p>Back on Marta's phone: "Jana is ready to help you" → tap to open
+            the private thread.</p>
+            <blockquote>
+              "That's not a chat app. That's a <strong>matching engine</strong>
+              — we look at who's available, in the right category, at the right
+              time of day, in their local timezone, and ping only them."
+            </blockquote>
+          `,
+        },
+        {
+          target: "1:35 – 2:00 · Demo beat 3 — Urgent",
+          html: `
+            <p><strong>New post on Marta's phone.</strong> Toggle the red 🚨
+            urgent button.</p>
+            <p>Even though Jana's in her "evening off-hours", the push still
+            rings — with a distinct vibration pattern.</p>
+            <blockquote>
+              "For emergencies, availability doesn't matter. This is the only
+              app I know of where <em>time-of-day</em> is part of the matching
+              logic at all."
+            </blockquote>
+          `,
+        },
+        {
+          target: "2:00 – 2:20 · Demo beat 4 — The thank-you moment",
+          html: `
+            <p><strong>On Marta's phone:</strong> tap "Mark as solved" → pick Jana.</p>
+            <p><strong>On Jana's phone:</strong> confetti bursts, chime plays, "+10 points".</p>
+            <blockquote>
+              "That's real Supabase Realtime, triggered by the resolve API,
+              firing canvas-confetti on the helper's device — even if they
+              never opened the app. Gamification that means something: 'a
+              human was helped because of you'."
+            </blockquote>
+            <p><strong>If this wow moment lands, pause for 1 second before moving on.</strong></p>
+          `,
+        },
+        {
+          target: "2:20 – 2:40 · The tech wow stack",
+          html: `
+            <p>Deliver this <em>fast and confident</em>. No explaining — just
+            name the pieces. Judges recognise them.</p>
+            <p>Emphasise the three reliability hardening bits at the bottom:
+            timezone-aware matching, keepalive fetches, background translation.
+            These are the details that prove this isn't vapourware.</p>
+            <blockquote>
+              "Every tiny detail is tuned for one user: the 78-year-old who
+              needed help on a Tuesday."
+            </blockquote>
+          `,
+        },
+        {
+          target: "2:40 – 2:55 · Impact",
+          html: `
+            <p>Three faces, three reasons. Linger on each one beat so the judges
+            mentally map someone they know onto the card.</p>
+            <p>Don't oversell ambition — the scope is deliberately a single
+            neighbourhood. Say "this could live in every rural municipality in
+            Central Europe tomorrow" and stop.</p>
+          `,
+        },
+        {
+          target: "2:55 – 3:00 · Close",
+          html: `
+            <blockquote>
+              "OmniBridge turns a neighbourhood back into a neighbourhood.
+              <br /><br />
+              Thank you."
+            </blockquote>
+            <p><strong>Breathe. Smile. Don't scroll past this slide.</strong></p>
+            <p>If they ask a question, the URL is right there — hand them your
+            phone if they want to poke at it.</p>
+          `,
+        },
+      ];
+
+      // ---------------------------------------------------------------
+      // Slide machinery — state, nav, HUD, notes.
+      // Kept deliberately small; this is one file and we want it to stay
+      // presentable offline without bundling anything.
+      // ---------------------------------------------------------------
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const counter = document.getElementById("counter");
+      const progressBar = document.getElementById("progress-bar");
+      const timerEl = document.getElementById("timer");
+      const notesEl = document.getElementById("notes");
+      const notesTitle = document.getElementById("notes-title");
+      const notesBody = document.getElementById("notes-body");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+      let idx = 0;
+      let notesOpen = false;
+
+      function renderNotes() {
+        const note = NOTES[idx];
+        if (!note) return;
+        notesTitle.textContent = note.target;
+        notesBody.innerHTML = note.html;
+      }
+
+      function show(i) {
+        idx = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach((s, j) => s.classList.toggle("active", j === idx));
+        counter.textContent = `${idx + 1} / ${slides.length}`;
+        // Target time per slide doubles as a subtle progress cue when the
+        // presenter is running without the timer — the progress bar still
+        // reflects "where we should be by now" purely based on slide index.
+        const expectedPct = ((idx + 1) / slides.length) * 100;
+        progressBar.style.width = `${expectedPct}%`;
+        renderNotes();
+      }
+
+      function next() {
+        show(idx + 1);
+      }
+      function prev() {
+        show(idx - 1);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")
+          return;
+        if (e.key === "ArrowRight" || e.key === " ") {
+          e.preventDefault();
+          next();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "n" || e.key === "N") {
+          notesOpen = !notesOpen;
+          notesEl.classList.toggle("open", notesOpen);
+        } else if (e.key === "t" || e.key === "T") {
+          startTimer();
+        } else if (e.key === "r" || e.key === "R") {
+          resetTimer();
+        }
+      });
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+
+      // Click anywhere outside the notes drawer to close it.
+      document.addEventListener("click", (e) => {
+        if (!notesOpen) return;
+        if (notesEl.contains(e.target)) return;
+        if (e.target.closest(".nav")) return;
+        notesOpen = false;
+        notesEl.classList.remove("open");
+      });
+
+      // ---------------------------------------------------------------
+      // 3-minute timer. Starts on T; renders into the top-right of the HUD.
+      // Warns at 2:30 and turns red past 3:00 so you can see, peripherally,
+      // whether you're drifting.
+      // ---------------------------------------------------------------
+      const LIMIT_SEC = 180;
+      let startedAt = null;
+      let tick = null;
+
+      function fmt(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${m}:${String(s).padStart(2, "0")}`;
+      }
+
+      function renderTimer() {
+        if (!startedAt) {
+          timerEl.textContent = `0:00 / 3:00`;
+          timerEl.classList.remove("live", "warn", "over");
+          return;
+        }
+        const elapsed = (Date.now() - startedAt) / 1000;
+        timerEl.textContent = `${fmt(elapsed)} / 3:00`;
+        timerEl.classList.toggle("live", elapsed < 150);
+        timerEl.classList.toggle("warn", elapsed >= 150 && elapsed < LIMIT_SEC);
+        timerEl.classList.toggle("over", elapsed >= LIMIT_SEC);
+      }
+
+      function startTimer() {
+        if (startedAt) return; // already running
+        startedAt = Date.now();
+        tick = setInterval(renderTimer, 500);
+        renderTimer();
+      }
+
+      function resetTimer() {
+        startedAt = null;
+        if (tick) {
+          clearInterval(tick);
+          tick = null;
+        }
+        renderTimer();
+        show(0);
+      }
+
+      show(0);
+      renderTimer();
+    </script>
+  </body>
+</html>
